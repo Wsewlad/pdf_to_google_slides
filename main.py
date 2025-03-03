@@ -13,6 +13,10 @@ for file in files:
     output_folder = "outputs/images"
     pptx_file = f"outputs/{file_name}.pptx"
 
+    # clean images folder
+    for f in os.listdir(output_folder):
+        os.remove(os.path.join(output_folder, f))
+
     # Step 1: Convert PDF to images
     convert_pdf_to_png(pdf_path, output_folder)
 
