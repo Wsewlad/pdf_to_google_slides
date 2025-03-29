@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 CONFIG = {
     'input_dir': Path("inputs/pdf"),
     'output_dir': Path("outputs/images"),
-    'output_pptx_dir': Path("outputs"),
+    'output_pptx_dir': Path("outputs/pptx"),
     'processed_dir': Path("outputs/processed"),
     'supported_formats': ['.pdf']
 }

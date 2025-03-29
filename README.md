@@ -80,6 +80,7 @@ pdf_to_google_slides/
 │   └── pdf/           # Place PDF files here
 ├── outputs/
 │   ├── images/        # Temporary storage for converted images
+│   ├── pptx/          # Generated PowerPoint presentations
 │   └── processed/     # Processed PDF files are moved here
 ├── services/
 │   ├── pdf/          # PDF processing services
