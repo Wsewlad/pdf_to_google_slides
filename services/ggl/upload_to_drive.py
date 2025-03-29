@@ -7,7 +7,7 @@ SCOPES = ['https://www.googleapis.com/auth/drive.file']
 SERVICE_ACCOUNT_FILE = 'credentials.json'  # Your Google API credentials file
 
 # Your main Google account email (change this to your actual email)
-MAIN_GOOGLE_ACCOUNT = "wladyslawfil@gmail.com"
+emails = ["wladyslawfil@gmail.com", "yaraukrainka@gmail.com", "oksana.stavytska@gmail.com"]
 
 
 def upload_to_google_drive(file_path):
@@ -29,15 +29,26 @@ def upload_to_google_drive(file_path):
 
     print(f"✅ Uploaded to Google Drive: {file_link}")
 
-    # Share the file with your main Google account
-    permission = {
+    # share for two people
+    permission1 = {
         "type": "user",
         "role": "writer",  # Change to "reader" for view-only access
-        "emailAddress": MAIN_GOOGLE_ACCOUNT
+        "emailAddress": emails[0]
+    }
+    permission2 = {
+        "type": "user",
+        "role": "writer",  # Change to "reader" for view-only access
+        "emailAddress": emails[1]
+    }
+    permission3 = {
+        "type": "user",
+        "role": "writer",  # Change to "reader" for view-only access
+        "emailAddress": emails[2]
     }
 
-    drive_service.permissions().create(fileId=file_id, body=permission).execute()
-    print(f"✅ Shared with {MAIN_GOOGLE_ACCOUNT}")
+    drive_service.permissions().create(fileId=file_id, body=permission1).execute()
+    drive_service.permissions().create(fileId=file_id, body=permission2).execute()
+    drive_service.permissions().create(fileId=file_id, body=permission3).execute()
 
 
 if __name__ == "__main__":
