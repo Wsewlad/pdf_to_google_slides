@@ -1,6 +1,7 @@
 import os
 import sys
 import logging
+import shutil
 from pathlib import Path
 from typing import List
 from services.pdf.pdf_to_png import convert_pdf_to_png
@@ -23,12 +24,13 @@ CONFIG = {
     'input_dir': Path("inputs/pdf"),
     'output_dir': Path("outputs/images"),
     'output_pptx_dir': Path("outputs"),
+    'processed_dir': Path("outputs/processed"),
     'supported_formats': ['.pdf']
 }
 
 def setup_directories() -> None:
     """Create necessary directories if they don't exist."""
-    for directory in [CONFIG['input_dir'], CONFIG['output_dir'], CONFIG['output_pptx_dir']]:
+    for directory in [CONFIG['input_dir'], CONFIG['output_dir'], CONFIG['output_pptx_dir'], CONFIG['processed_dir']]:
         directory.mkdir(parents=True, exist_ok=True)
 
 def get_pdf_files() -> List[Path]:
@@ -67,6 +69,11 @@ def process_pdf_file(pdf_path: Path) -> None:
         # Step 3: Upload to Google Drive
         logger.info("Uploading to Google Drive...")
         upload_to_google_drive(pptx_file)
+        
+        # Step 4: Move processed PDF to processed directory
+        processed_path = CONFIG['processed_dir'] / pdf_path.name
+        shutil.move(str(pdf_path), str(processed_path))
+        logger.info(f"Moved {pdf_path.name} to processed directory")
         
         logger.info(f"Successfully processed {pdf_path.name}")
         

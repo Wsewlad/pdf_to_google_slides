@@ -9,6 +9,7 @@ A Python tool that automatically converts PDF files to PowerPoint presentations 
 - Handles multiple PDF files in batch
 - Provides detailed logging of the conversion process
 - Error handling and recovery
+- Automatically moves processed PDFs to a separate directory
 
 ## Prerequisites
 
@@ -68,7 +69,8 @@ python main.py
 The script will:
 1. Convert each PDF to a PowerPoint presentation
 2. Upload the presentations to Google Drive
-3. Log the process in `conversion.log`
+3. Move processed PDFs to the `outputs/processed` directory
+4. Log the process in `conversion.log`
 
 ## Project Structure
 
@@ -77,7 +79,8 @@ pdf_to_google_slides/
 ├── inputs/
 │   └── pdf/           # Place PDF files here
 ├── outputs/
-│   └── images/        # Temporary storage for converted images
+│   ├── images/        # Temporary storage for converted images
+│   └── processed/     # Processed PDF files are moved here
 ├── services/
 │   ├── pdf/          # PDF processing services
 │   ├── pptx/         # PowerPoint creation services
