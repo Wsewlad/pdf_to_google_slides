@@ -25,7 +25,8 @@ CONFIG = {
     'output_dir': Path("outputs/images"),
     'output_pptx_dir': Path("outputs/pptx"),
     'processed_dir': Path("outputs/processed"),
-    'supported_formats': ['.pdf']
+    'supported_formats': ['.pdf'],
+    'images_per_slide': 2  # Can be 1 or 2
 }
 
 def setup_directories() -> None:
@@ -63,8 +64,8 @@ def process_pdf_file(pdf_path: Path) -> None:
         convert_pdf_to_png(pdf_path, CONFIG['output_dir'])
         
         # Step 2: Convert images to PowerPoint
-        logger.info("Creating PowerPoint presentation...")
-        create_pptx_from_images(CONFIG['output_dir'], pptx_file)
+        logger.info(f"Creating PowerPoint presentation with {CONFIG['images_per_slide']} images per slide...")
+        create_pptx_from_images(CONFIG['output_dir'], pptx_file, CONFIG['images_per_slide'])
         
         # Step 3: Upload to Google Drive
         logger.info("Uploading to Google Drive...")
